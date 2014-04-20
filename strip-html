@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'nokogiri'
+
+doc = Nokogiri::HTML($stdin.read)
+puts doc.xpath("//text()").remove

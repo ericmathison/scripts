@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# Bookmark links to file from selection
+# Written by Eric Mathison on Sat Feb 22 16:21:21 PST 2014
+
+link = `xsel`
+
+File.write(ARGV[0], link + "\n", mode: 'a')
+
+puts File.read(ARGV[0])

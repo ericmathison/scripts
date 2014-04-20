@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+#
+# created by Eric Mathison on: Sun Apr 20 01:53:39 PDT 2014
+#
+# Description: Prepends text to each line of a file and gives that file
+# executable permissions. This can sometimes be helpful when making one off
+# scripts that use a list of file names.
+#
+# Usage: prepend-executable <text to prepend> <file>
+
+require 'tempfile'
+
+temp_file = Tempfile.new('working-file')
+
+File.foreach(ARGV[1]) do |line|
+  temp_file << ARGV[0]
+  temp_file << line
+end
+
+temp_file.close
+FileUtils.mv(temp_file.path, ARGV[1])
+FileUtils.chmod('u+x', ARGV[1])

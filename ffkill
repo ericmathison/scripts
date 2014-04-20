@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Kills Firefox
+# Written by Eric Mathison on: Fri Feb 28 13:14:35 PST 2014
+
+kill -15 $(pidof firefox)

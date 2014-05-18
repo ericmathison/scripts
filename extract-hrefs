@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'nokogiri'
+require 'uri'
+
+doc = Nokogiri::HTML($stdin.read)
+doc.xpath("//a").each do |link|
+  puts  URI.decode(link['href'])
+end

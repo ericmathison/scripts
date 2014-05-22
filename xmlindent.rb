@@ -1,4 +1,9 @@
 #!/usr/bin/env ruby
+
+# Based on a script by Emmanuel Oga:
+# https://gist.github.com/EmmanuelOga/322025
+# http://emmanueloga.wordpress.com/2009/09/29/pretty-printing-xhtml-with-nokogiri-and-xslt/
+
 require 'nokogiri'
 
 XSL = <<-EOXSL

@@ -1,5 +1,4 @@
-#!/usr/bin/ruby
-require 'rubygems'
+#!/usr/bin/env ruby
 require 'nokogiri'
 
 XSL = <<-EOXSL
@@ -54,4 +53,3 @@ EOXSL
 xsl = Nokogiri::XSLT(XSL)
 xml = Nokogiri(STDIN.read)
 STDOUT.print xsl.apply_to(xml).to_s
-

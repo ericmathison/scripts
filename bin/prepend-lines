@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+# Usage: prepend-lines <file with text to prepend> [files to prepend with text]...
+#
+# prepend-lines adds the text of the first file specified to the beginning of
+# each additional file specified.
+
+require 'tempfile'
+require 'fileutils'
+
+prepend_text = File.read(ARGV[0])
+
+ARGV[1..-1].each do |file|
+  temp_file = Tempfile.new(File.basename(file))
+  File.write(temp_file.path, prepend_text)
+  File.write(temp_file.path, File.read(file), mode: 'a')
+  FileUtils.mv temp_file.path, file
+end

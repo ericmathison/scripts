@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+# Usage: extract-inner-html-body [HTML FILE]...
+#
+# For each html file given as an argument, extract-inner-html-body writes the
+# contents of the body tag to a new file with the same name and the .processed
+# extension.
+
+require 'nokogiri'
+
+ARGV.each do |file_name|
+  File.open("#{file_name}.processed", 'w') do |file|
+    file.puts Nokogiri::HTML(File.open(file_name))
+      .xpath('//body').inner_html
+  end
+end

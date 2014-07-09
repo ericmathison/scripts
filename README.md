@@ -1,4 +1,7 @@
-bin
-===
+scripts
+=======
+A collection of my personal scripts.
 
-A collection of scrips that I keep on my $PATH.
+bin directory
+-------------
+The files in this directory are scripts that I keep on my $PATH.

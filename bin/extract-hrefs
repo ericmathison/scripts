@@ -5,5 +5,7 @@ require 'uri'
 
 doc = Nokogiri::HTML($stdin.read)
 doc.xpath("//a").each do |link|
-  puts  URI.decode(link['href'])
+  if !link['href'].nil?
+    puts  URI.decode(link['href']) if link['href'][/\Ahttp/]
+  end
 end

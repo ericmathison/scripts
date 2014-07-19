@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+# XSLT based on:
+# http://stackoverflow.com/questions/8920149/how-do-i-pretty-print-or-indent-html-using-xslt-while-preserving-script-tags
+
+require 'nokogiri'
+
+doc = ::Nokogiri::XML.parse($stdin)
+xsl = ::Nokogiri::XSLT(<<XSLT)
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:strip-space elements="*" />
+  <xsl:output omit-xml-declaration="yes" method="xml" indent="yes" />
+
+  <xsl:template match="node()|@*">
+    <xsl:copy>
+      <xsl:apply-templates select="node()|@*" />
+    </xsl:copy>
+  </xsl:template>
+
+</xsl:stylesheet>
+XSLT
+
+puts xsl.apply_to(doc).to_s

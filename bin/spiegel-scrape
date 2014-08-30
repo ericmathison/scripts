@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# written on: Fri Aug 29 19:34:46 PDT 2014
+#
+# usage:
+#
+# spiegel-scrape
+#
+# No args needed. The url comes from the linux "selection" (different from the 
+# clipboard).
+#
+# This will write the content of a link to a Der Spiegel
+# (http://www.spiegel.de/international) url (printable version). The name of the
+# output file comes from the name of the article as found in the url.
+
+url = `xsel`
+content = `w3m -dump #{url}`
+name = url[/.*\/(.*)-a-\d+-druck\.html/, 1]
+
+File.write(name, content)

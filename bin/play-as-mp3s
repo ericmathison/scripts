@@ -10,4 +10,5 @@
 system 'cplay', *Dir['*.mp3', '*.m4a', '*.wav']
                   .reject { |name| name =~ /2\.(mp3|m4a|wav)\z/ }
                   .map { |name| name.sub(/\.(m4a|wav)\z/, '.mp3') }
+                  .uniq
                   .sort

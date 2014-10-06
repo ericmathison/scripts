@@ -5,7 +5,7 @@
 #
 # spiegel-scrape
 #
-# No args needed. The url comes from the linux "selection" (different from the 
+# No args needed. The url comes from the linux "selection" (different from the
 # clipboard).
 #
 # This will write the content of a link to a Der Spiegel

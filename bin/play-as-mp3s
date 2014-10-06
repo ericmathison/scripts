@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+# Created by Eric Mathison on: Tue Sep 23 00:06:14 PDT 2014
+#
+# The script takes the music files in the current directory and attempts to play
+# them (with cplay) as if they had mp3 extensions. This is useful when a
+# conversion is in process and the current music files are expected to become
+# mp3s.
+
+system 'cplay', *Dir['*.mp3', '*.m4a', '*.wav']
+                  .reject { |name| name =~ /2\.(mp3|m4a|wav)\z/ }
+                  .map { |name| name.sub(/\.(m4a|wav)\z/, '.mp3') }
+                  .sort

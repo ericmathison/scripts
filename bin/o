@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'shellwords'
+
+# written by Eric Mathison on: Tue Oct  7 18:26:39 PDT 2014
+#
+# Opens a file in linux with its default application, detatching the application
+# from the terminal.
+#
+# Usage:
+# o [FILE...]
+
+exec "(xdg-open #{ARGV.shelljoin} &)"

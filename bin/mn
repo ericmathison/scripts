@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# quickly toggle mounting and unmounting of usb drive
+
+function mounted_devices_count() {
+    echo $(ls /media/eric | wc --lines)
+}
+
+if [ $(mounted_devices_count) -eq 0 ]
+then
+    gvfs-mount --device /dev/sdc1
+
+    # need to check again because we can't check return code from gvfs-mount
+    # as it seems to return zero even when mount wasn't successful
+    if [ $(mounted_devices_count) -eq 0 ]
+    then
+        gvfs-mount --device /dev/sdc
+    fi
+else
+    gvfs-mount --unmount /media/eric/*
+fi

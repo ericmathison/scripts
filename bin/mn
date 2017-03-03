@@ -17,5 +17,5 @@ then
     done
     [ $(mounted_devices_count) -gt 0 ] && echo 'mounted drive(s)'
 else
-    gvfs-mount --unmount /media/eric/*
+    gvfs-mount --unmount /media/$USER/*
 fi

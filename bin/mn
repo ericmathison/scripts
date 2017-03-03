@@ -14,7 +14,7 @@ then
         grep -q ID_BUS=usb &&
         gvfs-mount --device /dev/$name > /dev/null
 
-        [ $(mounted_devices_count) -eq 0 ] && echo 'mounted drive(s)'
+        [ $(mounted_devices_count) -gt 0 ] && echo 'mounted drive(s)'
     done
 else
     gvfs-mount --unmount /media/eric/*

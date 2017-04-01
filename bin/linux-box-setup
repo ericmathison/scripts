@@ -73,7 +73,7 @@ if ! which ruby-install > /dev/null; then
     sudo ruby-install ruby && echo done installing ruby
 fi
 
-if ! which chruby > /dev/null; then 
+if [ ! -f /usr/local/share/chruby/chruby.sh ]; then
     dir=/tmp/chruby
     tarball=/tmp/chruby.tar.gz
     echo -n 'Installing chruby... '

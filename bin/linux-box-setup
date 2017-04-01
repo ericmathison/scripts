@@ -54,6 +54,7 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 mkdir -p ~/scripts
 [ ! -f ~/scripts/z.sh ] && wget -P ~/scripts 'https://raw.githubusercontent.com/rupa/z/master/z.sh'
+[ ! -f ~/scripts/z.fish ] && wget -P ~/scripts 'https://raw.githubusercontent.com/sjl/z-fish/master/z.fish'
 [ ! -f ~/scripts/bin/diff-highlight ] && wget -P ~/scripts/bin 'https://raw.githubusercontent.com/git/git/master/contrib/diff-highlight/diff-highlight'
 chmod u+x ~/scripts/bin/diff-highlight
 

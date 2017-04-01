@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# Update list of packages
+sudo apt-get update
+
+# Install software updates
+sudo apt-get upgrade
+
+# Install essential packages
+# pg gem needed libpq-dev library
+sudo apt-get install vim-gtk git i3 cplay mplayer imagemagick dtrx curl \
+w3m ufw mpg123 eyed3 feh postgresql libpq-dev sqlite libsqlite3-dev rlwrap fish
+
+# other packages that might be nice to have (not installing these by default)
+# gparted pacpl screen ripit 
+
+# set up firewall
+sudo ufw enable
+
+# Vim Pathogen
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+[ ! -f ~/.vim/autoload ] && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+# Setup dotfiles
+[ ! -d ~/dotfiles ] && git clone git://github.com/ericmathison/dotfiles.git ~/dotfiles
+~/dotfiles/link.sh # this will overwrite existing files with symlink
+
+# Install personal bin scripts
+[ ! -d ~/scripts ] && git clone git://github.com/ericmathison/scripts.git ~/scripts
+
+# Vim Plugins
+(cd ~/.vim/bundle
+[ ! -d cream-showinvisibles ] && git clone https://github.com/vim-scripts/cream-showinvisibles.git
+[ ! -d jellybeans.vim ] && git clone https://github.com/nanotech/jellybeans.vim.git 
+[ ! -d seoul256.vim ] && git clone https://github.com/junegunn/seoul256.vim.git
+[ ! -d sideways.vim ] && git clone https://github.com/AndrewRadev/sideways.vim.git
+[ ! -d syntastic ] && git clone https://github.com/scrooloose/syntastic.git
+[ ! -d vim-blockle ] && git clone https://github.com/jgdavey/vim-blockle.git
+[ ! -d vim-colorschemes ] && git clone https://github.com/flazz/vim-colorschemes.git
+[ ! -d vim-colors-solarized ] && git clone https://github.com/altercation/vim-colors-solarized.git
+[ ! -d vim-commentary ] && git clone https://github.com/tpope/vim-commentary.git
+[ ! -d vim-endwise ] && git clone https://github.com/tpope/vim-endwise.git
+[ ! -d vim-gnupg ] && git clone https://github.com/jamessan/vim-gnupg.git
+[ ! -d vim-markdown ] && git clone https://github.com/tpope/vim-markdown.git
+[ ! -d vim-rails ] && git clone https://github.com/tpope/vim-rails.git
+[ ! -d vim-repeat ] && git clone https://github.com/tpope/vim-repeat.git
+[ ! -d vim-ruby ] && git clone https://github.com/vim-ruby/vim-ruby.git
+[ ! -d vim-surround ] && git clone https://github.com/tpope/vim-surround.git
+[ ! -d vim-textobj-rubyblock ] && git clone https://github.com/nelstrom/vim-textobj-rubyblock.git
+[ ! -d vim-textobj-user ] && git clone https://github.com/kana/vim-textobj-user.git
+[ ! -d vim-unimpaired ] && git clone https://github.com/tpope/vim-unimpaired.git
+)
+
+mkdir -p ~/scripts
+[ ! -f ~/scripts/z.sh ] && wget -P ~/scripts 'https://raw.githubusercontent.com/rupa/z/master/z.sh'
+[ ! -f ~/scripts/bin/diff-highlight ] && wget -P ~/scripts/bin 'https://raw.githubusercontent.com/git/git/master/contrib/diff-highlight/diff-highlight'
+chmod u+x ~/scripts/bin/diff-highlight
+
+if ! which ruby-install > /dev/null; then
+    dir=/tmp/ruby-install
+    tarball=/tmp/ruby-install.tar.gz
+    echo -n 'installing ruby-install... '
+    wget -O $tarball https://api.github.com/repos/postmodern/ruby-install/tarball > /dev/null 2>&1 # wget uses stderr for non errors
+    mkdir $dir
+    tar -C $dir -xvzf $tarball --strip-components 1 > /dev/null
+    (cd $dir && sudo make install > /dev/null && echo done)
+    rm -r $dir
+    rm $tarball
+
+    echo 'Installing Ruby... '
+    sudo ruby-install ruby && echo done installing ruby
+fi
+
+if ! which chruby > /dev/null; then 
+    dir=/tmp/chruby
+    tarball=/tmp/chruby.tar.gz
+    echo -n 'Installing chruby... '
+    wget -O $tarball https://api.github.com/repos/postmodern/chruby/tarball > /dev/null 2>&1
+    mkdir $dir
+    tar -C $dir -xvzf $tarball --strip-components 1 > /dev/null
+    (cd $dir && sudo make install > /dev/null && echo done)
+    rm -r $dir && echo done installing chruby
+    rm $tarball
+fi

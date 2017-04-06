@@ -84,3 +84,15 @@ if [ ! -f /usr/local/share/chruby/chruby.sh ]; then
     rm -r $dir && echo done installing chruby
     rm $tarball
 fi
+
+if [ ! -f /usr/local/share/chruby/chruby.fish ]; then
+    dir=/tmp/chruby-fish
+    tarball=/tmp/chruby-fish.tar.gz
+    echo -n 'Installing chruby-fish... '
+    wget -O $tarball https://api.github.com/repos/JeanMertz/chruby-fish/tarball > /dev/null 2>&1
+    mkdir $dir
+    tar -C $dir -xvzf $tarball --strip-components 1 > /dev/null
+    (cd $dir && sudo make install > /dev/null && echo done)
+    rm -r $dir && echo done installing chruby-fish
+    rm $tarball
+fi

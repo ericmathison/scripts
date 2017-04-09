@@ -50,6 +50,7 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 [ ! -d vim-textobj-rubyblock ] && git clone https://github.com/nelstrom/vim-textobj-rubyblock.git
 [ ! -d vim-textobj-user ] && git clone https://github.com/kana/vim-textobj-user.git
 [ ! -d vim-unimpaired ] && git clone https://github.com/tpope/vim-unimpaired.git
+[ ! -d vim-fish ] && git clone https://github.com/dag/vim-fish.git
 )
 
 mkdir -p ~/scripts

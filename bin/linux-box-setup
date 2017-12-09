@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# get the latest version of the fish shell
+sudo add-apt-repository ppa:fish-shell/release-2
+
 # Update list of packages
 sudo apt-get update
 
@@ -10,7 +13,7 @@ sudo apt-get upgrade
 # pg gem needed libpq-dev library
 sudo apt-get install vim-gtk git i3 cplay mplayer imagemagick dtrx curl \
 w3m ufw mpg123 eyed3 feh postgresql libpq-dev postgresql-contrib postgresql-doc
-sqlite libsqlite3-dev rlwrap
+sqlite libsqlite3-dev rlwrap fish
 
 # other packages that might be nice to have (not installing these by default)
 # gparted pacpl screen ripit 
@@ -98,3 +101,5 @@ if [ ! -f /usr/local/share/chruby/chruby.fish ]; then
     rm -r $dir && echo done installing chruby-fish
     rm $tarball
 fi
+
+chsh -s $(which fish)

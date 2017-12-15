@@ -16,7 +16,7 @@ w3m ufw mpg123 eyed3 feh postgresql libpq-dev postgresql-contrib postgresql-doc
 sqlite libsqlite3-dev rlwrap fish
 
 # other packages that might be nice to have (not installing these by default)
-# gparted pacpl screen ripit 
+# gparted pacpl screen ripit gimp
 
 # set up firewall
 sudo ufw enable

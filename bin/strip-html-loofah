@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'loofah'
+
+string = Loofah.fragment($stdin.read)
+puts string.to_text

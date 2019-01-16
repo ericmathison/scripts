@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # get the latest version of the fish shell
-sudo add-apt-repository ppa:fish-shell/release-2
+sudo add-apt-repository ppa:fish-shell/release-3
 
 # Update list of packages
 sudo apt-get update
@@ -12,8 +12,8 @@ sudo apt-get upgrade
 # Install essential packages
 # pg gem needed libpq-dev library
 sudo apt-get install vim-gtk git i3 cplay mplayer imagemagick dtrx curl \
-w3m ufw mpg123 eyed3 feh postgresql libpq-dev postgresql-contrib postgresql-doc
-sqlite libsqlite3-dev rlwrap fish
+w3m ufw mpg123 eyed3 feh postgresql libpq-dev postgresql-contrib postgresql-doc \
+sqlite libsqlite3-dev rlwrap fish build-essential
 
 # other packages that might be nice to have (not installing these by default)
 # gparted pacpl screen ripit gimp
@@ -36,7 +36,7 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 # Vim Plugins
 (cd ~/.vim/bundle
 [ ! -d cream-showinvisibles ] && git clone https://github.com/vim-scripts/cream-showinvisibles.git
-[ ! -d jellybeans.vim ] && git clone https://github.com/nanotech/jellybeans.vim.git 
+[ ! -d jellybeans.vim ] && git clone https://github.com/nanotech/jellybeans.vim.git
 [ ! -d seoul256.vim ] && git clone https://github.com/junegunn/seoul256.vim.git
 [ ! -d sideways.vim ] && git clone https://github.com/AndrewRadev/sideways.vim.git
 [ ! -d syntastic ] && git clone https://github.com/scrooloose/syntastic.git
@@ -75,31 +75,14 @@ if ! which ruby-install > /dev/null; then
     rm $tarball
 
     echo 'Installing Ruby... '
-    sudo ruby-install ruby && echo done installing ruby
+    ruby-install ruby && echo done installing ruby
 fi
 
-if [ ! -f /usr/local/share/chruby/chruby.sh ]; then
-    dir=/tmp/chruby
-    tarball=/tmp/chruby.tar.gz
-    echo -n 'Installing chruby... '
-    wget -O $tarball https://api.github.com/repos/postmodern/chruby/tarball > /dev/null 2>&1
-    mkdir $dir
-    tar -C $dir -xvzf $tarball --strip-components 1 > /dev/null
-    (cd $dir && sudo make install > /dev/null && echo done)
-    rm -r $dir && echo done installing chruby
-    rm $tarball
-fi
-
-if [ ! -f /usr/local/share/chruby/chruby.fish ]; then
-    dir=/tmp/chruby-fish
-    tarball=/tmp/chruby-fish.tar.gz
-    echo -n 'Installing chruby-fish... '
-    wget -O $tarball https://api.github.com/repos/JeanMertz/chruby-fish/tarball > /dev/null 2>&1
-    mkdir $dir
-    tar -C $dir -xvzf $tarball --strip-components 1 > /dev/null
-    (cd $dir && sudo make install > /dev/null && echo done)
-    rm -r $dir && echo done installing chruby-fish
-    rm $tarball
+if ! which fry > /dev/null && [ ! -d /tmp/fry ]; then
+    cd /tmp
+    git clone https://github.com/terlar/fry.git
+    cd fry
+    make user-install
 fi
 
 chsh -s $(which fish)

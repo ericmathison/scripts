@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+#
+# This program could probably be replaced with the hxwls command in html-xml-utils
+# http://www.w3.org/Tools/HTML-XML-utils/
 
 require 'nokogiri'
 require 'uri'

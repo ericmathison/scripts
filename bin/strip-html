@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+#
+# try to find an alternative in html-xml-utils
 
 require 'nokogiri'
 

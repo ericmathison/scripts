@@ -1,0 +1,14 @@
+#!/bin/bash
+
+groupadd admin
+useradd -G admin deploy
+passwd deploy
+mkdir /home/deploy
+chsh -s /bin/bash deploy
+mkdir -p /home/deploy/.ssh
+cd /home/deploy/.ssh
+wget 'https://github.com/ericmathison.keys'
+cat ericmathison.keys >> authorized_keys
+rm ericmathison.keys
+chown -R deploy:deploy /home/deploy
+apt-get update && apt-get upgrade
